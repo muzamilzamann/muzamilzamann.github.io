@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muzamil Zaman</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="Style.css">
+    <meta name="color-scheme" content="dark light">
+    <script>
+        window.onload = function () {
+            // Smooth scroll to top with animation
+            window.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: 'smooth'
+            });
+
+            // Add scroll to top button functionality
+            const scrollBtn = document.createElement('button');
+            scrollBtn.innerHTML = '↑';
+            scrollBtn.className = 'scroll-to-top';
+            document.body.appendChild(scrollBtn);
+
+            scrollBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Show/hide scroll button based on scroll position
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    scrollBtn.style.opacity = '1';
+                    scrollBtn.style.transform = 'translateY(0)';
+                } else {
+                    scrollBtn.style.opacity = '0';
+                    scrollBtn.style.transform = 'translateY(20px)';
+                }
+            });
+
+            // Highlight active nav link based on visible section
+            const navLinks = document.querySelectorAll('.nav-links a');
+            const sections = document.querySelectorAll('main section[id]');
+
+            function setActiveLink(id) {
+                navLinks.forEach(a => {
+                    const href = a.getAttribute('href');
+                    if (href === `#${id}`) {
+                        a.classList.add('active');
+                    } else {
+                        a.classList.remove('active');
+                    }
+                });
+            }
+
+            // IntersectionObserver to detect section in view
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            setActiveLink(entry.target.id);
+                        }
+                    });
+                }, { root: null, threshold: 0.55 });
+
+                sections.forEach(s => observer.observe(s));
+            } else {
+                // Fallback: use hashchange and scroll position
+                window.addEventListener('hashchange', () => setActiveLink(location.hash.replace('#', '')));
+                window.addEventListener('scroll', () => {
+                    let current = 'home';
+                    sections.forEach(section => {
+                        const rect = section.getBoundingClientRect();
+                        if (rect.top <= window.innerHeight * 0.45 && rect.bottom >= window.innerHeight * 0.45) {
+                            current = section.id;
+                        }
+                    });
+                    setActiveLink(current);
+                });
+                // initial check
+                setTimeout(() => {
+                    const initialHash = location.hash.replace('#', '') || 'home';
+                    setActiveLink(initialHash);
+                }, 100);
+            }
+        }
+
+        if (window.history.scrollRestoration) {
+            window.history.scrollRestoration = 'manual';
+        }
+    </script>
+    <style>
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: white;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .scroll-to-top:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px) !important;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+
+<body>
+
+    <input type="checkbox" id="theme-switch" hidden>
+    <input type="checkbox" id="nav-toggle" hidden>
+
+    <header>
+        <nav class="container" aria-label="Primary">
+            <a href="#home" class="logo" aria-label="Go to home">
+                &lt; <span class="gradient-text">Muzamil Zaman</span>/&gt;
+            </a>
+
+            <label for="nav-toggle" class="menu-toggle" aria-label="Toggle navigation"
+                aria-controls="primary-navigation">
+                <span class="menu-bar"></span>
+                <span class="menu-bar"></span>
+                <span class="menu-bar"></span>
+            </label>
+
+            <div id="primary-navigation" class="nav-links" role="navigation">
+                <a href="#about">About</a>
+                <a href="#skills">Skills</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+
+        <section id="home" aria-labelledby="hero-title">
+            <div class="container hero-grid">
+                <div class="hero-left">
+                    <h1 id="hero-title" class="headline">
+                        Hi, I'm <span class="gradient-text">Muzamil Zaman</span><br>
+                        <span class="accent">AI & Software Engineer</span><br>
+                    </h1>
+                    <p class="summary">
+                        I develop innovative solutions combining AI/ML with robust software engineering. I create data-driven 
+                        solutions that deliver real value.
+                    </p>
+                    <div class="cta-buttons">
+                        <a href="Muzamil_Resume.pdf" class="btn btn-cta" download aria-label="Download CV">CV</a>
+                        <a href="#projects" class="btn btn-secondary" aria-label="View projects">View Projects</a>
+                    </div>
+                </div>
+
+                <div class="hero-right">
+                    <img src="img.jpg" alt="Portrait of Muzamil Zaman" class="hero-portrait"
+                        onerror="this.src='img.jpg'; this.onerror=null;">
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="section-bg" aria-labelledby="about-title">
+            <div class="container content-container">
+                <h2 id="about-title">About Me</h2>
+                <div class="content">
+                    <p>
+                        I'm pursuing a BS in Software Engineering, specializing in developing intelligent business solutions 
+                        and data-driven applications. My portfolio showcases diverse projects including a web-based Petrol 
+                        Pump Management System, an object-oriented Pharmacy Management System, and an AI-powered Crop 
+                        Recommendation System.
+                    </p>
+                    <p>
+                        My technical journey spans full-stack development with PHP and MySQL, object-oriented programming 
+                        with C++, and machine learning with Python. I've developed a strong foundation in implementing 
+                        business logic, database design, and artificial intelligence algorithms.
+                    </p>
+                    <p>
+                        I'm passionate about creating solutions that combine traditional software engineering with modern 
+                        AI/ML approaches. Currently seeking opportunities to contribute to innovative projects where I can 
+                        apply my diverse skill set in business automation, data analysis, and intelligent systems.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" aria-labelledby="skills-title">
+            <div class="container">
+                <div class="skills-header">
+                    <span class="section-label">Expertise</span>
+                    <h2 id="skills-title">Technical Expertise</h2>
+                    <p class="skills-subtitle">I specialize in developing intelligent business solutions, from web applications to machine learning systems.</p>
+                </div>
+
+                <div class="skills-cards-grid">
+
+                    <article class="skill-card">
+                        <div class="skill-icon" aria-hidden="true">
+                            <!-- ML icon -->
+                            <svg viewBox="0 0 24 24" width="40" height="40" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="#06d6a0" stroke-width="1.5"/>
+                            </svg>
+                        </div>
+                        <h3>AI & Machine Learning</h3>
+                        <p class="skill-desc">Developing intelligent systems using ML algorithms like KNN and Decision Trees for data-driven predictions and analysis.</p>
+                        <div class="progress" role="progressbar" aria-valuenow="92" aria-valuemin="0"
+                            aria-valuemax="100">
+                            <div class="progress-bar" style="width:60%"></div>
+                        </div>
+                        <div class="percent">60%</div>
+                    </article>
+
+                    <article class="skill-card">
+                        <div class="skill-icon" aria-hidden="true">
+                            <!-- Full Stack icon -->
+                            <svg viewBox="0 0 24 24" width="40" height="40" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <rect x="4" y="4" width="16" height="16" rx="2" stroke="#06d6a0" stroke-width="1.5"/>
+                                <path d="M4 10h16M8 14h8" stroke="#06d6a0" stroke-width="1.5"/>
+                            </svg>
+                        </div>
+                        <h3>Full Stack Development</h3>
+                        <p class="skill-desc">Building complete web applications using PHP, MySQL, HTML, and CSS, with focus on business logic and user experience.</p>
+                        <div class="progress" role="progressbar" aria-valuenow="90" aria-valuemin="0"
+                            aria-valuemax="100">
+                            <div class="progress-bar" style="width:90%"></div>
+                        </div>
+                        <div class="percent">90%</div>
+                    </article>
+
+                    <article class="skill-card">
+                        <div class="skill-icon" aria-hidden="true">
+                            <!-- C++ icon -->
+                            <svg viewBox="0 0 24 24" width="40" height="40" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2L4 6v12l8 4 8-4V6l-8-4z" fill="#06d6a0"/>
+                                <path d="M8 12h8M12 8v8" stroke="white" stroke-width="1.5"/>
+                            </svg>
+                        </div>
+                        <h3>OOP & C++</h3>
+                        <p class="skill-desc">Developing robust desktop applications using object-oriented principles, with strong focus on system design and data structures.</p>
+                        <div class="progress" role="progressbar" aria-valuenow="88" aria-valuemin="0"
+                            aria-valuemax="100">
+                            <div class="progress-bar" style="width:88%"></div>
+                        </div>
+                        <div class="percent">88%</div>
+                    </article>
+
+                    <article class="skill-card">
+                        <div class="skill-icon" aria-hidden="true">
+                            <!-- Database icon -->
+                            <svg viewBox="0 0 24 24" width="40" height="40" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 3C7.58 3 4 4.79 4 7v10c0 2.21 3.58 4 8 4s8-1.79 8-4V7c0-2.21-3.58-4-8-4z" fill="#06d6a0"/>
+                                <path d="M4 7c0 2.21 3.58 4 8 4s8-1.79 8-4" stroke="#06d6a0" stroke-width="1.5"/>
+                            </svg>
+                        </div>
+                        <h3>Database Management</h3>
+                        <p class="skill-desc">Creating efficient database schemas and management systems for business operations, inventory tracking, and data analysis.</p>
+                        <div class="progress" role="progressbar" aria-valuenow="85" aria-valuemin="0"
+                            aria-valuemax="100">
+                            <div class="progress-bar" style="width:85%"></div>
+                        </div>
+                        <div class="percent">85%</div>
+                    </article>
+
+                    <article class="skill-card">
+                        <div class="skill-icon" aria-hidden="true">
+                            <!-- Algorithm icon -->
+                            <svg viewBox="0 0 24 24" width="40" height="40" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 4h16v16H4V4z" stroke="#06d6a0" stroke-width="1.5"/>
+                                <path d="M8 8l4 4-4 4M12 16h4" stroke="#06d6a0" stroke-width="1.5"/>
+                            </svg>
+                        </div>
+                        <h3>Algorithms & Data Analysis</h3>
+                        <p class="skill-desc">Implementing efficient algorithms for data processing, analysis, and predictive modeling in various applications.</p>
+                        <div class="progress" role="progressbar" aria-valuenow="87" aria-valuemin="0"
+                            aria-valuemax="100">
+                            <div class="progress-bar" style="width:87%"></div>
+                        </div>
+                        <div class="percent">87%</div>
+                    </article>
+
+                    <article class="skill-card">
+                        <div class="skill-icon" aria-hidden="true">
+                            <!-- Python icon -->
+                            <svg viewBox="0 0 24 24" width="40" height="40" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" fill="#06d6a0"/>
+                                <path d="M8 12s2-2 4-2 4 2 4 2-2 2-4 2-4-2-4-2z" stroke="#06d6a0" stroke-width="1.5"/>
+                            </svg>
+                        </div>
+                        <h3>Python Language</h3>
+                        <p class="skill-desc">Building machine learning applications, implementing predictive models, and developing data analysis solutions using Python and its ML libraries.</p>
+                        <div class="progress" role="progressbar" aria-valuenow="88" aria-valuemin="0"
+                            aria-valuemax="100">
+                            <div class="progress-bar" style="width:65%"></div>
+                        </div>
+                        <div class="percent">65%</div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="section-bg" aria-labelledby="projects-title">
+            <div class="container">
+                <h2 id="projects-title">Projects</h2>
+
+                <div class="project-grid">
+
+                    <div class="project-card">
+                        <img src="pso.jpg"
+                            onerror="this.src='https://placehold.co/600x400/1f2937/9ca3af?text=Project+Screenshot'; this.onerror=null;">
+                        <div class="card-content">
+                            <h3>Database Project</h3>
+                            <p>
+                                A web-based application designed to automate and streamline petrol pump operations. It
+                                manages fuel inventory, tracks daily sales, handles employee shifts, and generates
+                                comprehensive reports for efficient and transparent management
+                            </p>
+                            <div class="tech-pills">
+                                <span class="tech-pill">Html</span>
+                                <span class="tech-pill">CSS</span>
+                                <span class="tech-pill">MySQL</span>
+                                <span class="tech-pill">Php</span>
+                            </div>
+                            <div class="card-links">
+                                <a href="https://github.com/muzamilzamann/Database-Project">GitHub Repo &rarr;</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <img src="Pharmacy.jpg"
+                            onerror="this.src='https://placehold.co/600x400/1f2937/9ca3af?text=Project+Screenshot'; this.onerror=null;">
+                        <div class="card-content">
+                            <h3>Object-Oriented Programming</h3>
+                            <p>
+                                An object-oriented program designed to manage a pharmacy's inventory. It uses classes
+                                for Medicine, Supplier, and Stock to track drug details, manage supplier information,
+                                handle sales, and automatically alert staff about low-stock items or approaching expiry
+                                dates.
+                            </p>
+                            <div class="tech-pills">
+                                <span class="tech-pill">C++ (OOP)</span>
+                                <span class="tech-pill">File Handling</span>
+                                <span class="tech-pill">Exception Handling</span>
+                            </div>
+                            <div class="card-links">
+                                <a href="https://github.com/muzamilzamann/OOP-Final-Project"
+                                    aria-label="Project Two GitHub repository">GitHub Repo &rarr;</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <img src="img1.jpeg"
+                            onerror="this.src='https://placehold.co/600x400/1f2937/9ca3af?text=Calculator+Screenshot'; this.onerror=null;">
+                        <div class="card-content">
+                            <h3>AI/ML</h3>
+                            <p>
+                                A data-driven system that recommends the most suitable crop to grow from 22 different
+                                types. It analyzes environmental factors like soil nutrients (N, P, K), temperature,
+                                humidity, and rainfall to make predictions. The project compares models like KNN and
+                                Decision Trees, finding that KNN provides the highest accuracy for this task.
+                            </p>
+                            <div class="tech-pills">
+                                <span class="tech-pill">Artificial  intelligence</span>
+                                <span class="tech-pill">Machine Learning</span>
+                            </div>
+                            <div class="card-links">
+                                <a href="https://github.com/muzamilzamann/AI-ML-Project"
+                                    aria-label="AI/ML Project GitHub repository">GitHub Repo &rarr;</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="education" aria-labelledby="education-title">
+            <div class="container content-container text-center">
+                <h2 id="education-title">Education</h2>
+                <h3>Bachelor of Science in Software Engineering</h3>
+                <p class="university">The University of Lahore, Lahore, Pakistan</p>
+                <p class="graduation">Expected Graduation: January, 2027</p>
+                <p class="courses">
+                    <strong>Relevant Coursework:</strong> Data Structures & Algorithms, Object-Oriented Design, Database
+                    Systems, Software Requirement Engineering, Software Architecture, Operating Systems.
+                </p>
+            </div>
+        </section>
+
+        <section id="contact" class="section-bg" aria-labelledby="contact-title">
+            <div class="container content-container text-center">
+                <h2 id="contact-title">Contact</h2>
+                <p>
+                    I'm open to internships and project collaborations. For opportunities or questions, feel free to
+                    reach out using the form below.
+                </p>
+
+                <form id="contact-form" class="contact-form"
+                    onsubmit="event.preventDefault(); alert('Thank you for your message! I will get back to you soon.');">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="name">Name *</label>
+                            <input type="text" id="name" name="name" required placeholder="Your name">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="tel" id="phone" name="phone" placeholder="Your phone number">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="age">Age</label>
+                            <input type="number" id="age" name="age" min="16" max="100" placeholder="Your age">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="gender">Gender</label>
+                            <select id="gender" name="gender">
+                                <option value="">Select gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                                <option value="prefer-not">Prefer not to say</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group hobbies-group">
+                            <label>Hobbies</label>
+                            <div class="checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="hobbies" value="reading"> Reading
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="hobbies" value="coding"> Coding
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="hobbies" value="gaming"> Gaming
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="hobbies" value="sports"> Sports
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="hobbies" value="music"> Music
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="hobbies" value="travel"> Travel
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="country">Country</label>
+                            <select id="country" name="country">
+                                <option value="">Select country</option>
+                                <option value="pakistan">Pakistan</option>
+                                <option value="india">India</option>
+                                <option value="usa">United States</option>
+                                <option value="uk">United Kingdom</option>
+                                <option value="canada">Canada</option>
+                                <option value="australia">Australia</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="city">City</label>
+                            <input type="text" id="city" name="city" placeholder="Your city">
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="address">Address</label>
+                            <textarea id="address" name="address" rows="2" placeholder="Your address"></textarea>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="message">Message *</label>
+                            <textarea id="message" name="message" rows="4" required
+                                placeholder="Your message"></textarea>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary submit-btn">Send Message</button>
+                </form>
+
+                <div class="social-links" role="list" aria-label="Social links">
+                    <a href="https://github.com/" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile">
+                        <svg fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill-rule="evenodd"
+                                d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.009-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.026 2.747-1.026.546 1.379.201 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                    <a href="https://www.linkedin.com/in/muzamil-zaman-53789a285/" target="_blank"
+                        rel="noopener noreferrer" aria-label="LinkedIn profile">
+                        <svg fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path
+                                d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer aria-label="Site footer">
+        <div class="container">
+            <p>&copy; 2025 Muzamil Zaman. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>
