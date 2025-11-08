@@ -12,6 +12,78 @@
     <meta name="color-scheme" content="dark light">
     <script>
         window.onload = function () {
+            // Custom Cursor Effect (Desktop Only)
+            if (window.innerWidth > 768 && !window.matchMedia('(pointer: coarse)').matches) {
+                const cursor = document.createElement('div');
+                cursor.className = 'custom-cursor';
+                const cursorDot = document.createElement('div');
+                cursorDot.className = 'cursor-dot';
+                cursor.appendChild(cursorDot);
+                document.body.appendChild(cursor);
+                
+                let mouseX = window.innerWidth / 2;
+                let mouseY = window.innerHeight / 2;
+                let cursorX = mouseX;
+                let cursorY = mouseY;
+                
+                // Initialize cursor position
+                cursor.style.left = cursorX + 'px';
+                cursor.style.top = cursorY + 'px';
+                cursor.style.opacity = '0';
+                
+                // Show cursor after a brief delay
+                setTimeout(() => {
+                    cursor.style.opacity = '1';
+                }, 100);
+                
+                document.addEventListener('mousemove', (e) => {
+                    mouseX = e.clientX;
+                    mouseY = e.clientY;
+                });
+                
+                // Smooth cursor animation using requestAnimationFrame
+                let animationFrameId;
+                function animateCursor() {
+                    // Main cursor ring (slower, smoother)
+                    cursorX += (mouseX - cursorX) * 0.15;
+                    cursorY += (mouseY - cursorY) * 0.15;
+                    cursor.style.left = cursorX + 'px';
+                    cursor.style.top = cursorY + 'px';
+                    
+                    requestAnimationFrame(animateCursor);
+                }
+                animateCursor();
+                
+                // Add hover effects for interactive elements
+                const interactiveElements = document.querySelectorAll('a, button, .btn, .project-card, .skill-card, .nav-links a, .card-links a, input, textarea, select');
+                interactiveElements.forEach(el => {
+                    el.addEventListener('mouseenter', () => {
+                        cursor.classList.add('cursor-hover');
+                    });
+                    el.addEventListener('mouseleave', () => {
+                        cursor.classList.remove('cursor-hover');
+                    });
+                    
+                    // Magnetic glow effect - track mouse position on element
+                    el.addEventListener('mousemove', (e) => {
+                        const rect = el.getBoundingClientRect();
+                        const x = ((e.clientX - rect.left) / rect.width) * 100;
+                        const y = ((e.clientY - rect.top) / rect.height) * 100;
+                        el.style.setProperty('--mouse-x', x + '%');
+                        el.style.setProperty('--mouse-y', y + '%');
+                    });
+                });
+                
+                // Hide cursor when mouse leaves window
+                document.addEventListener('mouseleave', () => {
+                    cursor.style.opacity = '0';
+                });
+                
+                document.addEventListener('mouseenter', () => {
+                    cursor.style.opacity = '1';
+                });
+            }
+
             // Smooth scroll to top with animation
             window.scrollTo({
                 top: 0,
@@ -19,14 +91,28 @@
                 behavior: 'smooth'
             });
 
+            // Header scroll effect
+            const header = document.querySelector('header');
+            let lastScroll = 0;
+            
+            window.addEventListener('scroll', () => {
+                const currentScroll = window.scrollY;
+                if (currentScroll > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+                lastScroll = currentScroll;
+            });
+
             // Add scroll to top button functionality
             const scrollBtn = document.createElement('button');
             scrollBtn.innerHTML = '↑';
             scrollBtn.className = 'scroll-to-top';
+            scrollBtn.setAttribute('aria-label', 'Scroll to top');
             document.body.appendChild(scrollBtn);
 
             scrollBtn.addEventListener('click', () => {
-                
                 window.scrollTo({
                     top: 0,
                     behavior: 'smooth'
@@ -37,12 +123,88 @@
             window.addEventListener('scroll', () => {
                 if (window.scrollY > 300) {
                     scrollBtn.style.opacity = '1';
-                    scrollBtn.style.transform = 'translateY(0)';
+                    scrollBtn.style.pointerEvents = 'auto';
+                    scrollBtn.style.transform = 'translateY(0) scale(1)';
                 } else {
                     scrollBtn.style.opacity = '0';
-                    scrollBtn.style.transform = 'translateY(20px)';
+                    scrollBtn.style.pointerEvents = 'none';
+                    scrollBtn.style.transform = 'translateY(20px) scale(0.8)';
                 }
             });
+
+            // Animate elements on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Observe skill cards and project cards with staggered animation
+            document.querySelectorAll('.skill-card, .project-card').forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+                observer.observe(card);
+            });
+
+            // Add floating particles effect
+            if (!document.getElementById('particle-style')) {
+                const style = document.createElement('style');
+                style.id = 'particle-style';
+                style.textContent = `
+                    @keyframes floatUp {
+                        to {
+                            transform: translate(var(--offset-x, 0px), -100vh);
+                            opacity: 0;
+                        }
+                    }
+                    .floating-particle {
+                        will-change: transform, opacity;
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+            
+            function createParticle() {
+                const offsetX = (Math.random() - 0.5) * 200;
+                const particle = document.createElement('div');
+                particle.className = 'floating-particle';
+                const size = 3 + Math.random() * 3;
+                particle.style.cssText = `
+                    position: fixed;
+                    width: ${size}px;
+                    height: ${size}px;
+                    background: var(--accent);
+                    border-radius: 50%;
+                    pointer-events: none;
+                    opacity: ${0.2 + Math.random() * 0.2};
+                    z-index: -1;
+                    --offset-x: ${offsetX}px;
+                    box-shadow: 0 0 10px rgba(6, 214, 160, 0.5);
+                `;
+                const startX = Math.random() * window.innerWidth;
+                const duration = 3000 + Math.random() * 2000;
+                
+                particle.style.left = startX + 'px';
+                particle.style.top = window.innerHeight + 20 + 'px';
+                particle.style.animation = `floatUp ${duration}ms linear forwards`;
+                document.body.appendChild(particle);
+                
+                setTimeout(() => particle.remove(), duration);
+            }
+            
+            // Create particles periodically (only on desktop for performance)
+            if (window.innerWidth > 768) {
+                setInterval(createParticle, 2500);
+            }
 
             // Highlight active nav link based on visible section
             const navLinks = document.querySelectorAll('.nav-links a');
@@ -61,7 +223,7 @@
 
             // IntersectionObserver to detect section in view
             if ('IntersectionObserver' in window) {
-                const observer = new IntersectionObserver((entries) => {
+                const navObserver = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
                         if (entry.isIntersecting) {
                             setActiveLink(entry.target.id);
@@ -69,7 +231,7 @@
                     });
                 }, { root: null, threshold: 0.55 });
 
-                sections.forEach(s => observer.observe(s));
+                sections.forEach(s => navObserver.observe(s));
             } else {
                 // Fallback: use hashchange and scroll position
                 window.addEventListener('hashchange', () => setActiveLink(location.hash.replace('#', '')));
@@ -100,28 +262,36 @@
             position: fixed;
             bottom: 30px;
             right: 30px;
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
-            background: var(--accent);
+            background: linear-gradient(135deg, var(--accent), var(--accent-hover));
             color: white;
-            border: none;
-            font-size: 20px;
+            border: 2px solid var(--border-light);
+            font-size: 22px;
             cursor: pointer;
             opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.3s ease;
+            transform: translateY(20px) scale(0.8);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 1000;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2), 0 0 20px rgba(6, 214, 160, 0.3);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            pointer-events: none;
         }
 
         .scroll-to-top:hover {
-            background: var(--accent-hover);
-            transform: translateY(-2px) !important;
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(135deg, var(--accent-hover), var(--accent));
+            transform: translateY(-5px) scale(1.1) !important;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 30px rgba(6, 214, 160, 0.5);
+            border-color: var(--accent);
+        }
+
+        .scroll-to-top:active {
+            transform: translateY(-2px) scale(1.05) !important;
         }
     </style>
 </head>
