@@ -1,709 +1,485 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Muzamil Zaman</title>
+    <title>Muzamil Zaman — AI & Software Engineer</title>
+    <meta name="description" content="Muzamil Zaman — AI & Software Engineer building intelligent, data-driven solutions with machine learning and robust software engineering.">
+    <meta name="author" content="Muzamil Zaman">
+    <meta name="keywords" content="Muzamil Zaman, AI Engineer, Software Engineer, Machine Learning, Full Stack Developer, Python, C++, Portfolio">
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Muzamil Zaman — AI & Software Engineer">
+    <meta property="og:description" content="Building intelligent, data-driven solutions with AI/ML and software engineering.">
+    <meta property="og:image" content="img.jpeg">
+
+    <meta name="theme-color" content="#0a0612">
+    <link rel="icon" type="image/jpeg" href="img.jpeg">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <link rel="stylesheet" href="Style.css">
-    <meta name="color-scheme" content="dark light">
-    <script>
-        window.onload = function () {
-            // Custom Cursor Effect (Desktop Only)
-            if (window.innerWidth > 768 && !window.matchMedia('(pointer: coarse)').matches) {
-                const cursor = document.createElement('div');
-                cursor.className = 'custom-cursor';
-                const cursorDot = document.createElement('div');
-                cursorDot.className = 'cursor-dot';
-                cursor.appendChild(cursorDot);
-                document.body.appendChild(cursor);
-                
-                let mouseX = window.innerWidth / 2;
-                let mouseY = window.innerHeight / 2;
-                let cursorX = mouseX;
-                let cursorY = mouseY;
-                
-                // Initialize cursor position
-                cursor.style.left = cursorX + 'px';
-                cursor.style.top = cursorY + 'px';
-                cursor.style.opacity = '0';
-                
-                // Show cursor after a brief delay
-                setTimeout(() => {
-                    cursor.style.opacity = '1';
-                }, 100);
-                
-                document.addEventListener('mousemove', (e) => {
-                    mouseX = e.clientX;
-                    mouseY = e.clientY;
-                });
-                
-                // Smooth cursor animation using requestAnimationFrame
-                let animationFrameId;
-                function animateCursor() {
-                    // Main cursor ring (slower, smoother)
-                    cursorX += (mouseX - cursorX) * 0.15;
-                    cursorY += (mouseY - cursorY) * 0.15;
-                    cursor.style.left = cursorX + 'px';
-                    cursor.style.top = cursorY + 'px';
-                    
-                    requestAnimationFrame(animateCursor);
-                }
-                animateCursor();
-                
-                // Add hover effects for interactive elements
-                const interactiveElements = document.querySelectorAll('a, button, .btn, .project-card, .skill-card, .nav-links a, .card-links a, input, textarea, select');
-                interactiveElements.forEach(el => {
-                    el.addEventListener('mouseenter', () => {
-                        cursor.classList.add('cursor-hover');
-                    });
-                    el.addEventListener('mouseleave', () => {
-                        cursor.classList.remove('cursor-hover');
-                    });
-                    
-                    // Magnetic glow effect - track mouse position on element
-                    el.addEventListener('mousemove', (e) => {
-                        const rect = el.getBoundingClientRect();
-                        const x = ((e.clientX - rect.left) / rect.width) * 100;
-                        const y = ((e.clientY - rect.top) / rect.height) * 100;
-                        el.style.setProperty('--mouse-x', x + '%');
-                        el.style.setProperty('--mouse-y', y + '%');
-                    });
-                });
-                
-                // Hide cursor when mouse leaves window
-                document.addEventListener('mouseleave', () => {
-                    cursor.style.opacity = '0';
-                });
-                
-                document.addEventListener('mouseenter', () => {
-                    cursor.style.opacity = '1';
-                });
-            }
-
-            // Smooth scroll to top with animation
-            window.scrollTo({
-                top: 0,
-                left: 0,
-                behavior: 'smooth'
-            });
-
-            // Header scroll effect
-            const header = document.querySelector('header');
-            let lastScroll = 0;
-            
-            window.addEventListener('scroll', () => {
-                const currentScroll = window.scrollY;
-                if (currentScroll > 50) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
-                }
-                lastScroll = currentScroll;
-            });
-
-            // Add scroll to top button functionality
-            const scrollBtn = document.createElement('button');
-            scrollBtn.innerHTML = '↑';
-            scrollBtn.className = 'scroll-to-top';
-            scrollBtn.setAttribute('aria-label', 'Scroll to top');
-            document.body.appendChild(scrollBtn);
-
-            scrollBtn.addEventListener('click', () => {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            });
-
-            // Show/hide scroll button based on scroll position
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 300) {
-                    scrollBtn.style.opacity = '1';
-                    scrollBtn.style.pointerEvents = 'auto';
-                    scrollBtn.style.transform = 'translateY(0) scale(1)';
-                } else {
-                    scrollBtn.style.opacity = '0';
-                    scrollBtn.style.pointerEvents = 'none';
-                    scrollBtn.style.transform = 'translateY(20px) scale(0.8)';
-                }
-            });
-
-            // Animate elements on scroll
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }
-                });
-            }, observerOptions);
-
-            // Observe skill cards and project cards with staggered animation
-            document.querySelectorAll('.skill-card, .project-card').forEach((card, index) => {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(30px)';
-                card.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
-                observer.observe(card);
-            });
-
-            // Add floating particles effect
-            if (!document.getElementById('particle-style')) {
-                const style = document.createElement('style');
-                style.id = 'particle-style';
-                style.textContent = `
-                    @keyframes floatUp {
-                        to {
-                            transform: translate(var(--offset-x, 0px), -100vh);
-                            opacity: 0;
-                        }
-                    }
-                    .floating-particle {
-                        will-change: transform, opacity;
-                    }
-                `;
-                document.head.appendChild(style);
-            }
-            
-            function createParticle() {
-                const offsetX = (Math.random() - 0.5) * 200;
-                const particle = document.createElement('div');
-                particle.className = 'floating-particle';
-                const size = 3 + Math.random() * 3;
-                particle.style.cssText = `
-                    position: fixed;
-                    width: ${size}px;
-                    height: ${size}px;
-                    background: var(--accent);
-                    border-radius: 50%;
-                    pointer-events: none;
-                    opacity: ${0.2 + Math.random() * 0.2};
-                    z-index: -1;
-                    --offset-x: ${offsetX}px;
-                    box-shadow: 0 0 10px rgba(6, 214, 160, 0.5);
-                `;
-                const startX = Math.random() * window.innerWidth;
-                const duration = 3000 + Math.random() * 2000;
-                
-                particle.style.left = startX + 'px';
-                particle.style.top = window.innerHeight + 20 + 'px';
-                particle.style.animation = `floatUp ${duration}ms linear forwards`;
-                document.body.appendChild(particle);
-                
-                setTimeout(() => particle.remove(), duration);
-            }
-            
-            // Create particles periodically (only on desktop for performance)
-            if (window.innerWidth > 768) {
-                setInterval(createParticle, 2500);
-            }
-
-            // Highlight active nav link based on visible section
-            const navLinks = document.querySelectorAll('.nav-links a');
-            const sections = document.querySelectorAll('main section[id]');
-
-            function setActiveLink(id) {
-                navLinks.forEach(a => {
-                    const href = a.getAttribute('href');
-                    if (href === `#${id}`) {
-                        a.classList.add('active');
-                    } else {
-                        a.classList.remove('active');
-                    }
-                });
-            }
-
-            // IntersectionObserver to detect section in view
-            if ('IntersectionObserver' in window) {
-                const navObserver = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            setActiveLink(entry.target.id);
-                        }
-                    });
-                }, { root: null, threshold: 0.55 });
-
-                sections.forEach(s => navObserver.observe(s));
-            } else {
-                // Fallback: use hashchange and scroll position
-                window.addEventListener('hashchange', () => setActiveLink(location.hash.replace('#', '')));
-                window.addEventListener('scroll', () => {
-                    let current = 'home';
-                    sections.forEach(section => {
-                        const rect = section.getBoundingClientRect();
-                        if (rect.top <= window.innerHeight * 0.45 && rect.bottom >= window.innerHeight * 0.45) {
-                            current = section.id;
-                        }
-                    });
-                    setActiveLink(current);
-                });
-                // initial check
-                setTimeout(() => {
-                    const initialHash = location.hash.replace('#', '') || 'home';
-                    setActiveLink(initialHash);
-                }, 100);
-            }
-        }
-
-        if (window.history.scrollRestoration) {
-            window.history.scrollRestoration = 'manual';
-        }
-    </script>
-    <style>
-        .scroll-to-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--accent), var(--accent-hover));
-            color: white;
-            border: 2px solid var(--border-light);
-            font-size: 22px;
-            cursor: pointer;
-            opacity: 0;
-            transform: translateY(20px) scale(0.8);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2), 0 0 20px rgba(6, 214, 160, 0.3);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            pointer-events: none;
-        }
-
-        .scroll-to-top:hover {
-            background: linear-gradient(135deg, var(--accent-hover), var(--accent));
-            transform: translateY(-5px) scale(1.1) !important;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 30px rgba(6, 214, 160, 0.5);
-            border-color: var(--accent);
-        }
-
-        .scroll-to-top:active {
-            transform: translateY(-2px) scale(1.05) !important;
-        }
-    </style>
 </head>
 
 <body>
+    <!-- Scroll Progress -->
+    <div id="scroll-progress" class="scroll-progress"></div>
 
-    <input type="checkbox" id="theme-switch" hidden>
-    <input type="checkbox" id="nav-toggle" hidden>
+    <!-- Live animated background -->
+    <canvas id="bg-canvas" aria-hidden="true"></canvas>
+    <div class="aurora" aria-hidden="true">
+        <span class="aurora-blob blob-1"></span>
+        <span class="aurora-blob blob-2"></span>
+        <span class="aurora-blob blob-3"></span>
+    </div>
 
-    <header>
-        <nav class="container" aria-label="Primary">
+    <!-- Navigation -->
+    <nav id="site-nav">
+        <div class="container nav-inner">
             <a href="#home" class="logo" aria-label="Go to home">
-                &lt; <span class="gradient-text">Muzamil Zaman</span>/&gt;
+                MUZAMIL<span class="logo-dot">.</span>
             </a>
 
-            <label for="nav-toggle" class="menu-toggle" aria-label="Toggle navigation"
-                aria-controls="primary-navigation">
-                <span class="menu-bar"></span>
-                <span class="menu-bar"></span>
-                <span class="menu-bar"></span>
-            </label>
-
-            <div id="primary-navigation" class="nav-links" role="navigation">
+            <div class="nav-links" id="primary-navigation">
+                <a href="#home">Home</a>
                 <a href="#about">About</a>
-                <a href="#skills">Skills</a>
-                <a href="#projects">Projects</a>
-                <a href="#contact">Contact</a>
+                <a href="#expertise">Expertise</a>
+                <a href="#work">Work</a>
+                <a href="#experience">Experience</a>
+                <a href="#contact" class="nav-cta">Hire Me</a>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" type="button">
+                    <i class="fa-solid fa-moon icon-moon"></i>
+                    <i class="fa-solid fa-sun icon-sun"></i>
+                </button>
             </div>
-        </nav>
-    </header>
+
+            <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </nav>
 
     <main>
+        <!-- ===== HERO ===== -->
+        <section id="home" class="hero">
+            <div class="container hero-content">
+                <div class="hero-badge reveal">
+                    <span class="status-dot"></span> Available for Projects
+                </div>
 
-        <section id="home" aria-labelledby="hero-title">
-            <div class="container hero-grid">
-                <div class="hero-left">
-                    <h1 id="hero-title" class="headline">
-                        Hi, I'm <span class="gradient-text">Muzamil Zaman</span><br>
-                        <span class="accent">AI & Software Engineer</span><br>
-                    </h1>
-                    <p class="summary">
-                        I develop innovative solutions combining AI/ML with robust software engineering. I create data-driven 
-                        solutions that deliver real value.
-                    </p>
-                    <div class="cta-buttons">
-                        <a href="Resume.pdf" class="btn btn-cta" download aria-label="Download CV">CV</a>
-                        <a href="#projects" class="btn btn-secondary" aria-label="View projects">View Projects</a>
+                <h1 class="hero-title">
+                    <span class="hero-line"><span>MUZAMIL</span></span>
+                    <span class="hero-line gradient-text"><span>ZAMAN</span></span>
+                </h1>
+
+                <p class="hero-subtitle reveal">
+                    AI &amp; Software Engineer <span class="divider">|</span> Machine Learning Developer <span class="divider">|</span> Full Stack Developer
+                </p>
+
+                <div class="hero-cta reveal">
+                    <a href="#work" class="btn btn-solid">View Work</a>
+                    <a href="#contact" class="btn btn-ghost">Let's Talk</a>
+                </div>
+            </div>
+
+            <div class="hero-socials reveal">
+                <a href="https://github.com/muzamilzamann" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/muzamil-zaman-53789a285/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="https://www.facebook.com/share/1Kaox7KtY6/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+                <a href="https://www.instagram.com/muzamil__zaman?igsh=bHBla3kwYmZ4Mmhr" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+        </section>
+
+        <!-- ===== ABOUT ===== -->
+        <section id="about" class="section">
+            <div class="container">
+                <div class="section-head reveal">
+                    <span class="section-label">Identity</span>
+                    <h2 class="section-title">Who I Am<span class="title-dot">.</span></h2>
+                </div>
+
+                <div class="about-grid">
+                    <div class="about-portrait reveal">
+                        <div class="portrait-glow"></div>
+                        <div class="portrait-frame">
+                            <img src="img.jpeg" alt="Portrait of Muzamil Zaman"
+                                onerror="this.src='https://placehold.co/500x500/020617/6366f1?text=MZ'; this.onerror=null;">
+                        </div>
+                    </div>
+
+                    <div class="glass-card about-bio reveal">
+                        <h3>Muzamil Zaman</h3>
+                        <p>
+                            I'm an AI &amp; Software Engineer specializing in intelligent business solutions
+                            and data-driven applications. My work spans full-stack development with PHP and
+                            MySQL, object-oriented programming in C++, and machine learning with Python.
+                        </p>
+                        <p>
+                            My portfolio includes an AI-powered legal research platform, a crop
+                            recommendation system, and management systems — combining traditional software
+                            engineering with modern AI/ML to deliver real value.
+                        </p>
+                        <a href="Resume.pdf" class="btn btn-ghost btn-sm" download>
+                            <i class="fa-solid fa-download"></i> Download CV
+                        </a>
                     </div>
                 </div>
-
-                <div class="hero-right">
-                    <img src="img.jpeg" alt="Portrait of Muzamil Zaman" class="hero-portrait"
-                        onerror="this.src='img.jpg'; this.onerror=null;">
-                </div>
             </div>
         </section>
 
-        <section id="about" class="section-bg" aria-labelledby="about-title">
-            <div class="container content-container">
-                <h2 id="about-title">About Me</h2>
-                <div class="content">
-                    <p>
-                        I'm pursuing a BS in Software Engineering, specializing in developing intelligent business solutions 
-                        and data-driven applications. My portfolio showcases diverse projects including a web-based Petrol 
-                        Pump Management System, an object-oriented Pharmacy Management System, and an AI-powered Crop 
-                        Recommendation System.
-                    </p>
-                    <p>
-                        My technical journey spans full-stack development with PHP and MySQL, object-oriented programming 
-                        with C++, and machine learning with Python. I've developed a strong foundation in implementing 
-                        business logic, database design, and artificial intelligence algorithms.
-                    </p>
-                    <p>
-                        I'm passionate about creating solutions that combine traditional software engineering with modern 
-                        AI/ML approaches. Currently seeking opportunities to contribute to innovative projects where I can 
-                        apply my diverse skill set in business automation, data analysis, and intelligent systems.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <section id="skills" aria-labelledby="skills-title">
+        <!-- ===== EXPERTISE ===== -->
+        <section id="expertise" class="section">
             <div class="container">
-                <div class="skills-header">
-                    <span class="section-label">Expertise</span>
-                    <h2 id="skills-title">Technical Expertise</h2>
-                    <p class="skills-subtitle">I specialize in developing intelligent business solutions, from web applications to machine learning systems.</p>
+                <div class="section-head reveal">
+                    <span class="section-label">Features</span>
+                    <h2 class="section-title">What I Do<span class="title-dot">.</span></h2>
                 </div>
 
-                <div class="skills-cards-grid">
+                <div class="expertise-grid">
+                    <div class="glass-card expertise-card reveal">
+                        <div class="expertise-icon icon-sky"><i class="fa-solid fa-brain"></i></div>
+                        <h3>AI &amp; Machine Learning</h3>
+                        <p>Building intelligent systems using KNN, Decision Trees &amp; predictive modeling for data-driven decisions.</p>
+                    </div>
 
-                    <article class="skill-card">
-                        <div class="skill-icon" aria-hidden="true">
-                            <!-- ML icon -->
-                            <svg viewBox="0 0 24 24" width="40" height="40" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="#06d6a0" stroke-width="1.5"/>
-                            </svg>
-                        </div>
-                        <h3>AI & Machine Learning</h3>
-                        <p class="skill-desc">Developing intelligent systems using ML algorithms like KNN and Decision Trees for data-driven predictions and analysis.</p>
-                        <div class="progress" role="progressbar" aria-valuenow="92" aria-valuemin="0"
-                            aria-valuemax="100">
-                            <div class="progress-bar" style="width:60%"></div>
-                        </div>
-                        <div class="percent">60%</div>
-                    </article>
+                    <div class="glass-card expertise-card reveal">
+                        <div class="expertise-icon icon-indigo"><i class="fa-solid fa-server"></i></div>
+                        <h3>Backend &amp; APIs</h3>
+                        <p>Fast, scalable backend services and RESTful APIs with FastAPI, PHP &amp; MySQL.</p>
+                    </div>
 
-                    <article class="skill-card">
-                        <div class="skill-icon" aria-hidden="true">
-                            <!-- Full Stack icon -->
-                            <svg viewBox="0 0 24 24" width="40" height="40" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <rect x="4" y="4" width="16" height="16" rx="2" stroke="#06d6a0" stroke-width="1.5"/>
-                                <path d="M4 10h16M8 14h8" stroke="#06d6a0" stroke-width="1.5"/>
-                            </svg>
-                        </div>
+                    <div class="glass-card expertise-card reveal">
+                        <div class="expertise-icon icon-rose"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                        <h3>Modern UI Design</h3>
+                        <p>Clean, responsive interfaces with a strong focus on elite user experience.</p>
+                    </div>
+
+                    <div class="glass-card expertise-card reveal">
+                        <div class="expertise-icon icon-violet"><i class="fa-solid fa-mobile-screen"></i></div>
+                        <h3>Flutter &amp; Mobile</h3>
+                        <p>Cross-platform mobile apps delivering a native experience on iOS and Android.</p>
+                    </div>
+
+                    <div class="glass-card expertise-card reveal">
+                        <div class="expertise-icon icon-emerald"><i class="fa-solid fa-shield-halved"></i></div>
+                        <h3>Database &amp; Cloud</h3>
+                        <p>Efficient schemas, Firebase services, and cloud-native data management.</p>
+                    </div>
+
+                    <div class="glass-card expertise-card reveal">
+                        <div class="expertise-icon icon-amber"><i class="fa-brands fa-git-alt"></i></div>
+                        <h3>Version Control</h3>
+                        <p>Collaborative development with Git, GitHub &amp; clean branching strategies.</p>
+                    </div>
+
+                    <div class="glass-card expertise-card reveal">
+                        <div class="expertise-icon icon-cyan"><i class="fa-solid fa-layer-group"></i></div>
                         <h3>Full Stack Development</h3>
-                        <p class="skill-desc">Building complete web applications using PHP, MySQL, HTML, and CSS, with focus on business logic and user experience.</p>
-                        <div class="progress" role="progressbar" aria-valuenow="90" aria-valuemin="0"
-                            aria-valuemax="100">
-                            <div class="progress-bar" style="width:90%"></div>
-                        </div>
-                        <div class="percent">90%</div>
-                    </article>
-
-                    <article class="skill-card">
-                        <div class="skill-icon" aria-hidden="true">
-                            <!-- C++ icon -->
-                            <svg viewBox="0 0 24 24" width="40" height="40" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 2L4 6v12l8 4 8-4V6l-8-4z" fill="#06d6a0"/>
-                                <path d="M8 12h8M12 8v8" stroke="white" stroke-width="1.5"/>
-                            </svg>
-                        </div>
-                        <h3>OOP & C++</h3>
-                        <p class="skill-desc">Developing robust desktop applications using object-oriented principles, with strong focus on system design and data structures.</p>
-                        <div class="progress" role="progressbar" aria-valuenow="88" aria-valuemin="0"
-                            aria-valuemax="100">
-                            <div class="progress-bar" style="width:88%"></div>
-                        </div>
-                        <div class="percent">88%</div>
-                    </article>
-
-                    <article class="skill-card">
-                        <div class="skill-icon" aria-hidden="true">
-                            <!-- Database icon -->
-                            <svg viewBox="0 0 24 24" width="40" height="40" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 3C7.58 3 4 4.79 4 7v10c0 2.21 3.58 4 8 4s8-1.79 8-4V7c0-2.21-3.58-4-8-4z" fill="#06d6a0"/>
-                                <path d="M4 7c0 2.21 3.58 4 8 4s8-1.79 8-4" stroke="#06d6a0" stroke-width="1.5"/>
-                            </svg>
-                        </div>
-                        <h3>Database Management</h3>
-                        <p class="skill-desc">Creating efficient database schemas and management systems for business operations, inventory tracking, and data analysis.</p>
-                        <div class="progress" role="progressbar" aria-valuenow="85" aria-valuemin="0"
-                            aria-valuemax="100">
-                            <div class="progress-bar" style="width:85%"></div>
-                        </div>
-                        <div class="percent">85%</div>
-                    </article>
-
-                    <article class="skill-card">
-                        <div class="skill-icon" aria-hidden="true">
-                            <!-- Algorithm icon -->
-                            <svg viewBox="0 0 24 24" width="40" height="40" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path d="M4 4h16v16H4V4z" stroke="#06d6a0" stroke-width="1.5"/>
-                                <path d="M8 8l4 4-4 4M12 16h4" stroke="#06d6a0" stroke-width="1.5"/>
-                            </svg>
-                        </div>
-                        <h3>Algorithms & Data Analysis</h3>
-                        <p class="skill-desc">Implementing efficient algorithms for data processing, analysis, and predictive modeling in various applications.</p>
-                        <div class="progress" role="progressbar" aria-valuenow="87" aria-valuemin="0"
-                            aria-valuemax="100">
-                            <div class="progress-bar" style="width:87%"></div>
-                        </div>
-                        <div class="percent">87%</div>
-                    </article>
-
-                    <article class="skill-card">
-                        <div class="skill-icon" aria-hidden="true">
-                            <!-- Python icon -->
-                            <svg viewBox="0 0 24 24" width="40" height="40" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" fill="#06d6a0"/>
-                                <path d="M8 12s2-2 4-2 4 2 4 2-2 2-4 2-4-2-4-2z" stroke="#06d6a0" stroke-width="1.5"/>
-                            </svg>
-                        </div>
-                        <h3>Python Language</h3>
-                        <p class="skill-desc">Building machine learning applications, implementing predictive models, and developing data analysis solutions using Python and its ML libraries.</p>
-                        <div class="progress" role="progressbar" aria-valuenow="88" aria-valuemin="0"
-                            aria-valuemax="100">
-                            <div class="progress-bar" style="width:65%"></div>
-                        </div>
-                        <div class="percent">65%</div>
-                    </article>
-
+                        <p>End-to-end delivery — from database design &amp; APIs to responsive frontends that ship.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section id="projects" class="section-bg" aria-labelledby="projects-title">
+        <!-- ===== WORK ===== -->
+        <section id="work" class="section section-alt">
             <div class="container">
-                <h2 id="projects-title">Projects</h2>
+                <div class="section-head reveal">
+                    <span class="section-label">Selected Works</span>
+                    <h2 class="section-title">Featured Projects<span class="title-dot">.</span></h2>
+                </div>
 
                 <div class="project-grid">
-
-                    <div class="project-card">
-                        <img src="casevision.png"
-                            onerror="this.src='https://placehold.co/600x400/1f2937/9ca3af?text=CaseVision'; this.onerror=null;"
-                            style="object-fit: contain; background: #ffffff;">
-                        <div class="card-content">
-                            <h3>CaseVision — AI Legal Assistant</h3>
-                            <p>
-                                An AI-powered legal research platform built for Pakistani law, my Final Year Project.
-                                It uses OCR (with Urdu support) to digitize case documents and FIRs, integrates
-                                Google Gemini for intelligent legal analysis, and offers a cross-platform mobile
-                                experience backed by a FastAPI service and Firebase.
-                            </p>
-                            <div class="tech-pills">
-                                <span class="tech-pill">Flutter</span>
-                                <span class="tech-pill">FastAPI</span>
-                                <span class="tech-pill">MySQL</span>
-                                <span class="tech-pill">Firebase</span>
-                                <span class="tech-pill">Google Gemini</span>
-                                <span class="tech-pill">OCR</span>
-                            </div>
-                            <div class="card-links">
-                                <a href="https://github.com/muzamilzamann/CaseVision"
-                                    aria-label="CaseVision GitHub repository">GitHub Repo &rarr;</a>
-                            </div>
+                    <article class="glass-card project-card reveal" data-category="ai">
+                        <div class="project-img-wrap">
+                            <img src="casevision.png" alt="CaseVision" loading="lazy"
+                                onerror="this.src='https://placehold.co/600x750/020617/6366f1?text=CaseVision'; this.onerror=null;">
+                            <div class="project-overlay"></div>
                         </div>
-                    </div>
-
-                    <div class="project-card">
-                        <img src="pso.jpg"
-                            onerror="this.src='https://placehold.co/600x400/1f2937/9ca3af?text=Project+Screenshot'; this.onerror=null;">
-                        <div class="card-content">
-                            <h3>Database Project</h3>
-                            <p>
-                                A web-based application designed to automate and streamline petrol pump operations. It
-                                manages fuel inventory, tracks daily sales, handles employee shifts, and generates
-                                comprehensive reports for efficient and transparent management
-                            </p>
-                            <div class="tech-pills">
-                                <span class="tech-pill">Html</span>
-                                <span class="tech-pill">CSS</span>
-                                <span class="tech-pill">MySQL</span>
-                                <span class="tech-pill">Php</span>
-                            </div>
-                            <div class="card-links">
-                                <a href="https://github.com/muzamilzamann/Database-Project">GitHub Repo &rarr;</a>
-                            </div>
+                        <div class="project-info">
+                            <span class="project-tag tag-indigo">Flutter / FastAPI</span>
+                            <h3>CaseVision</h3>
+                            <p class="project-desc">AI-powered legal research platform for Pakistani law. OCR with Urdu support, Google Gemini analysis &amp; cross-platform mobile app.</p>
+                            <a href="https://github.com/muzamilzamann/CaseVision" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="CaseVision GitHub">
+                                <i class="fa-brands fa-github"></i>
+                            </a>
                         </div>
-                    </div>
+                    </article>
 
-                    <div class="project-card">
-                        <img src="Pharmacy.jpg"
-                            onerror="this.src='https://placehold.co/600x400/1f2937/9ca3af?text=Project+Screenshot'; this.onerror=null;">
-                        <div class="card-content">
-                            <h3>Object-Oriented Programming</h3>
-                            <p>
-                                An object-oriented program designed to manage a pharmacy's inventory. It uses classes
-                                for Medicine, Supplier, and Stock to track drug details, manage supplier information,
-                                handle sales, and automatically alert staff about low-stock items or approaching expiry
-                                dates.
-                            </p>
-                            <div class="tech-pills">
-                                <span class="tech-pill">C++ (OOP)</span>
-                                <span class="tech-pill">File Handling</span>
-                                <span class="tech-pill">Exception Handling</span>
-                            </div>
-                            <div class="card-links">
-                                <a href="https://github.com/muzamilzamann/OOP-Final-Project"
-                                    aria-label="Project Two GitHub repository">GitHub Repo &rarr;</a>
-                            </div>
+                    <article class="glass-card project-card reveal" data-category="web">
+                        <div class="project-img-wrap">
+                            <img src="pso.jpg" alt="Petrol Pump Management" loading="lazy"
+                                onerror="this.src='https://placehold.co/600x750/020617/6366f1?text=Petrol+Pump'; this.onerror=null;">
+                            <div class="project-overlay"></div>
                         </div>
-                    </div>
-
-                    <div class="project-card">
-                        <img src="AI.ML.jpeg"
-                            onerror="this.src='https://placehold.co/600x400/1f2937/9ca3af?text=Calculator+Screenshot'; this.onerror=null;">
-                        <div class="card-content">
-                            <h3>AI/ML</h3>
-                            <p>
-                                A data-driven system that recommends the most suitable crop to grow from 22 different
-                                types. It analyzes environmental factors like soil nutrients (N, P, K), temperature,
-                                humidity, and rainfall to make predictions. The project compares models like KNN and
-                                Decision Trees, finding that KNN provides the highest accuracy for this task.
-                            </p>
-                            <div class="tech-pills">
-                                <span class="tech-pill">Artificial  intelligence</span>
-                                <span class="tech-pill">Machine Learning</span>
-                            </div>
-                            <div class="card-links">
-                                <a href="https://github.com/muzamilzamann/AI-ML-Project"
-                                    aria-label="AI/ML Project GitHub repository">GitHub Repo &rarr;</a>
-                            </div>
+                        <div class="project-info">
+                            <span class="project-tag tag-blue">MySQL / PHP</span>
+                            <h3>Petroleum Pro</h3>
+                            <p class="project-desc">Web-based petrol pump management. Fuel inventory, daily sales, employee shifts &amp; comprehensive reporting.</p>
+                            <a href="https://github.com/muzamilzamann/Database-Project" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="Petrol Pump GitHub">
+                                <i class="fa-brands fa-github"></i>
+                            </a>
                         </div>
-                    </div>
+                    </article>
 
+                    <article class="glass-card project-card reveal" data-category="software">
+                        <div class="project-img-wrap">
+                            <img src="Pharmacy.jpg" alt="Pharmacy Management" loading="lazy"
+                                onerror="this.src='https://placehold.co/600x750/020617/6366f1?text=Pharmacy'; this.onerror=null;">
+                            <div class="project-overlay"></div>
+                        </div>
+                        <div class="project-info">
+                            <span class="project-tag tag-rose">C++ / OOP</span>
+                            <h3>Pharmacy System</h3>
+                            <p class="project-desc">OOP pharmacy inventory in C++. Tracks medicines, suppliers, sales &amp; auto-alerts for low-stock and expiry.</p>
+                            <a href="https://github.com/muzamilzamann/OOP-Final-Project" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="Pharmacy GitHub">
+                                <i class="fa-brands fa-github"></i>
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="glass-card project-card reveal" data-category="ai">
+                        <div class="project-img-wrap">
+                            <img src="AI.ML.jpeg" alt="Crop Recommendation" loading="lazy"
+                                onerror="this.src='https://placehold.co/600x750/020617/6366f1?text=AI+ML'; this.onerror=null;">
+                            <div class="project-overlay"></div>
+                        </div>
+                        <div class="project-info">
+                            <span class="project-tag tag-amber">AI / ML</span>
+                            <h3>Crop Recommendation</h3>
+                            <p class="project-desc">Data-driven system recommending the best crop from 22 types using soil nutrients, temperature &amp; rainfall. KNN vs Decision Trees.</p>
+                            <a href="https://github.com/muzamilzamann/AI-ML-Project" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="AI/ML GitHub">
+                                <i class="fa-brands fa-github"></i>
+                            </a>
+                        </div>
+                    </article>
                 </div>
             </div>
         </section>
 
-        <section id="education" aria-labelledby="education-title">
-            <div class="container content-container text-center">
-                <h2 id="education-title">Education</h2>
-                <h3>Bachelor of Science in Software Engineering</h3>
-                <p class="university">The University of Lahore, Lahore, Pakistan</p>
-                <p class="graduation">Expected Graduation: January, 2027</p>
-                <p class="courses">
-                    <strong>Relevant Coursework:</strong> Data Structures & Algorithms, Object-Oriented Design, Database
-                    Systems, Software Requirement Engineering, Software Architecture, Operating Systems.
-                </p>
-            </div>
-        </section>
-
-        <section id="contact" class="section-bg" aria-labelledby="contact-title">
+        <!-- ===== EXPERIENCE ===== -->
+        <section id="experience" class="section">
             <div class="container">
-                <div class="contact-header text-center">
-                    <span class="section-label">Get In Touch</span>
-                    <h2 id="contact-title">Contact</h2>
-                    <p class="contact-subtitle">
-                        I'm open to internships and project collaborations. For opportunities or questions, feel free
-                        to reach out using the form below.
-                    </p>
+                <div class="section-head reveal">
+                    <span class="section-label">Professional Journey</span>
+                    <h2 class="section-title">Experience<span class="title-dot">.</span></h2>
                 </div>
 
-                <div class="contact-layout">
-                    <form id="contact-form" class="contact-form"
-                        onsubmit="event.preventDefault(); alert('Thank you for your message! I will get back to you soon.');">
-                        <div class="form-grid">
-                            <div class="form-group">
-                                <label for="name">Name *</label>
-                                <input type="text" id="name" name="name" required placeholder="Your name">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="email">Email *</label>
-                                <input type="email" id="email" name="email" required
-                                    placeholder="your.email@example.com">
-                            </div>
-
-                            <div class="form-group full-width">
-                                <label for="subject">Subject</label>
-                                <input type="text" id="subject" name="subject" placeholder="What's this about?">
-                            </div>
-
-                            <div class="form-group full-width">
-                                <label for="message">Message *</label>
-                                <textarea id="message" name="message" rows="5" required
-                                    placeholder="Tell me a bit about your project or opportunity..."></textarea>
-                            </div>
+                <div class="timeline">
+                    <div class="timeline-item reveal">
+                        <div class="timeline-dot"></div>
+                        <span class="timeline-date">Mar 2026 — Apr 2026</span>
+                        <h3>AI/ML Engineering Intern</h3>
+                        <h4>DevelopersHub Corporation</h4>
+                        <p>Recognized for exceptional performance and significant contributions to technical projects. Grew practical skills in AI and Machine Learning through hands-on work and mentorship.</p>
+                        <div class="tech-pills">
+                            <span class="tech-pill">Python</span>
+                            <span class="tech-pill">Machine Learning</span>
+                            <span class="tech-pill">AI</span>
+                            <span class="tech-pill">Data Analysis</span>
                         </div>
+                    </div>
 
-                        <button type="submit" class="btn btn-primary submit-btn">Send Message</button>
-                    </form>
+                    <div class="timeline-item reveal">
+                        <div class="timeline-dot"></div>
+                        <span class="timeline-date">2024 — Present</span>
+                        <h3>Final Year Project · CaseVision</h3>
+                        <h4>AI Legal Assistant</h4>
+                        <p>Leading development of an AI-powered legal research platform for Pakistani law. Built OCR with Urdu support, integrated Google Gemini, and shipped a Flutter app backed by FastAPI &amp; Firebase.</p>
+                        <div class="tech-pills">
+                            <span class="tech-pill">Flutter</span>
+                            <span class="tech-pill">FastAPI</span>
+                            <span class="tech-pill">Gemini</span>
+                            <span class="tech-pill">Firebase</span>
+                        </div>
+                    </div>
 
-                    <div class="contact-info">
-                        <div class="contact-info-card">
-                            <h3>Let's Connect</h3>
-                            <p>
-                                Prefer social media or a direct message? Find me on any of the platforms below —
-                                I try to respond within a day or two.
-                            </p>
-                            <div class="social-links" role="list" aria-label="Social links">
-                                <a href="https://github.com/muzamilzamann" target="_blank" rel="noopener noreferrer"
-                                    aria-label="GitHub profile">
-                                    <svg fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                        <path fill-rule="evenodd"
-                                            d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.009-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.026 2.747-1.026.546 1.379.201 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-                                            clip-rule="evenodd" />
-                                    </svg>
-                                </a>
-                                <a href="https://www.linkedin.com/in/muzamil-zaman-53789a285/" target="_blank"
-                                    rel="noopener noreferrer" aria-label="LinkedIn profile">
-                                    <svg fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                        <path
-                                            d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-                                    </svg>
-                                </a>
-                                <a href="https://www.instagram.com/muzamil__zaman?igsh=bHBla3kwYmZ4Mmhr"
-                                    target="_blank" rel="noopener noreferrer" aria-label="Instagram profile">
-                                    <svg fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                        <path
-                                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6 6 0 100 12 6 6 0 000-12zm0 9.837a3.837 3.837 0 110-7.674 3.837 3.837 0 010 7.674zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
-                                    </svg>
-                                </a>
-                                <a href="https://www.facebook.com/share/1Kaox7KtY6/" target="_blank"
-                                    rel="noopener noreferrer" aria-label="Facebook profile">
-                                    <svg fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                        <path
-                                            d="M22 12.061C22 6.505 17.523 2 12 2S2 6.505 2 12.061c0 5.022 3.657 9.184 8.438 9.939v-7.03H7.898v-2.909h2.54V9.845c0-2.522 1.492-3.915 3.777-3.915 1.094 0 2.238.196 2.238.196v2.476h-1.26c-1.243 0-1.63.775-1.63 1.57v1.889h2.773l-.443 2.909h-2.33V22c4.78-.755 8.437-4.917 8.437-9.939z" />
-                                    </svg>
-                                </a>
-                            </div>
+                    <div class="timeline-item reveal">
+                        <div class="timeline-dot"></div>
+                        <span class="timeline-date">2024</span>
+                        <h3>AI / ML Project</h3>
+                        <h4>Crop Recommendation System</h4>
+                        <p>Built a system recommending the best crop from 22 types by analyzing soil nutrients, temperature, humidity &amp; rainfall. Compared KNN and Decision Trees — KNN delivered highest accuracy.</p>
+                        <div class="tech-pills">
+                            <span class="tech-pill">Python</span>
+                            <span class="tech-pill">KNN</span>
+                            <span class="tech-pill">Scikit-learn</span>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item reveal">
+                        <div class="timeline-dot"></div>
+                        <span class="timeline-date">2023 — 2024</span>
+                        <h3>Database &amp; OOP Projects</h3>
+                        <h4>Petrol Pump &amp; Pharmacy Management</h4>
+                        <p>Developed a web-based Petrol Pump Management System with PHP &amp; MySQL. Built an OOP Pharmacy Management System in C++ with low-stock alerts and expiry tracking.</p>
+                        <div class="tech-pills">
+                            <span class="tech-pill">PHP</span>
+                            <span class="tech-pill">MySQL</span>
+                            <span class="tech-pill">C++ (OOP)</span>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- ===== EDUCATION ===== -->
+        <section id="education" class="section section-alt">
+            <div class="container">
+                <div class="section-head reveal">
+                    <span class="section-label">Academics</span>
+                    <h2 class="section-title">Education<span class="title-dot">.</span></h2>
+                </div>
+
+                <div class="timeline">
+                    <div class="timeline-item reveal">
+                        <div class="timeline-dot"></div>
+                        <span class="timeline-date">2023 — 2027</span>
+                        <h3>BS Software Engineering</h3>
+                        <h4>The University of Lahore, Pakistan</h4>
+                        <p>Expected graduation: January 2027. Relevant coursework: Data Structures &amp; Algorithms, Object-Oriented Design, Database Systems, Software Requirement Engineering, Software Architecture, Operating Systems.</p>
+                        <div class="tech-pills">
+                            <span class="tech-pill">DSA</span>
+                            <span class="tech-pill">Databases</span>
+                            <span class="tech-pill">Software Architecture</span>
+                            <span class="tech-pill">OOP</span>
+                            <span class="tech-pill">Operating Systems</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SKILLS MARQUEE ===== -->
+        <section id="skills" class="section">
+            <div class="container">
+                <div class="section-head reveal">
+                    <span class="section-label">Expertise</span>
+                    <h2 class="section-title">Tech Stack<span class="title-dot">.</span></h2>
+                </div>
+            </div>
+
+            <div class="skills-marquee reveal">
+                <div class="skill-ribbon row-right">
+                    <div class="skill-chip"><i class="fa-brands fa-python"></i><span>Python</span></div>
+                    <div class="skill-chip"><i class="fa-solid fa-brain"></i><span>Machine Learning</span></div>
+                    <div class="skill-chip"><i class="fa-brands fa-flutter"></i><span>Flutter</span></div>
+                    <div class="skill-chip"><i class="fa-solid fa-bolt"></i><span>FastAPI</span></div>
+                    <div class="skill-chip"><i class="fa-solid fa-fire"></i><span>Firebase</span></div>
+                    <div class="skill-chip"><i class="fa-brands fa-php"></i><span>PHP</span></div>
+                    <!-- repeat -->
+                    <div class="skill-chip"><i class="fa-brands fa-python"></i><span>Python</span></div>
+                    <div class="skill-chip"><i class="fa-solid fa-brain"></i><span>Machine Learning</span></div>
+                    <div class="skill-chip"><i class="fa-brands fa-flutter"></i><span>Flutter</span></div>
+                    <div class="skill-chip"><i class="fa-solid fa-bolt"></i><span>FastAPI</span></div>
+                    <div class="skill-chip"><i class="fa-solid fa-fire"></i><span>Firebase</span></div>
+                    <div class="skill-chip"><i class="fa-brands fa-php"></i><span>PHP</span></div>
+                </div>
+
+                <div class="skill-ribbon row-left">
+                    <div class="skill-chip"><i class="fa-solid fa-database"></i><span>MySQL</span></div>
+                    <div class="skill-chip"><i class="fa-solid fa-c"></i><span>C++</span></div>
+                    <div class="skill-chip"><i class="fa-brands fa-html5"></i><span>HTML5</span></div>
+                    <div class="skill-chip"><i class="fa-brands fa-css3-alt"></i><span>CSS3</span></div>
+                    <div class="skill-chip"><i class="fa-brands fa-git-alt"></i><span>Git</span></div>
+                    <div class="skill-chip"><i class="fa-brands fa-github"></i><span>GitHub</span></div>
+                    <!-- repeat -->
+                    <div class="skill-chip"><i class="fa-solid fa-database"></i><span>MySQL</span></div>
+                    <div class="skill-chip"><i class="fa-solid fa-c"></i><span>C++</span></div>
+                    <div class="skill-chip"><i class="fa-brands fa-html5"></i><span>HTML5</span></div>
+                    <div class="skill-chip"><i class="fa-brands fa-css3-alt"></i><span>CSS3</span></div>
+                    <div class="skill-chip"><i class="fa-brands fa-git-alt"></i><span>Git</span></div>
+                    <div class="skill-chip"><i class="fa-brands fa-github"></i><span>GitHub</span></div>
+                </div>
+
+                <div class="skill-ribbon row-right">
+                    <div class="skill-chip"><i class="fa-solid fa-chart-line"></i><span>Data Analysis</span></div>
+                    <div class="skill-chip"><i class="fa-solid fa-sitemap"></i><span>Algorithms</span></div>
+                    <div class="skill-chip"><i class="fa-solid fa-cubes"></i><span>Software Architecture</span></div>
+                    <div class="skill-chip"><i class="fa-solid fa-robot"></i><span>Google Gemini</span></div>
+                    <div class="skill-chip"><i class="fa-solid fa-shield-halved"></i><span>Authentication</span></div>
+                    <div class="skill-chip"><i class="fa-solid fa-code"></i><span>REST APIs</span></div>
+                    <!-- repeat -->
+                    <div class="skill-chip"><i class="fa-solid fa-chart-line"></i><span>Data Analysis</span></div>
+                    <div class="skill-chip"><i class="fa-solid fa-sitemap"></i><span>Algorithms</span></div>
+                    <div class="skill-chip"><i class="fa-solid fa-cubes"></i><span>Software Architecture</span></div>
+                    <div class="skill-chip"><i class="fa-solid fa-robot"></i><span>Google Gemini</span></div>
+                    <div class="skill-chip"><i class="fa-solid fa-shield-halved"></i><span>Authentication</span></div>
+                    <div class="skill-chip"><i class="fa-solid fa-code"></i><span>REST APIs</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== CONTACT ===== -->
+        <section id="contact" class="section">
+            <div class="container">
+                <div class="contact-layout">
+                    <div class="glass-card contact-sidebar reveal">
+                        <h3>Muzamil<br>Zaman</h3>
+                        <span class="contact-role">AI &amp; SOFTWARE ENGINEER</span>
+                        <p>I'm passionate about combining traditional software engineering with modern AI/ML. Currently seeking opportunities in business automation, data analysis, and intelligent systems.</p>
+
+                        <div class="contact-details">
+                            <div class="contact-detail"><i class="fa-solid fa-envelope"></i> muzamilzaman@gmail.com</div>
+                            <div class="contact-detail"><i class="fa-solid fa-phone"></i> +92 304 0777025</div>
+                            <div class="contact-detail"><i class="fa-solid fa-location-dot"></i> Multan, Pakistan</div>
+                        </div>
+
+                        <div class="social-squircle-grid">
+                            <a href="https://github.com/muzamilzamann" target="_blank" rel="noopener noreferrer" class="social-squircle github" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                            <a href="https://www.linkedin.com/in/muzamil-zaman-53789a285/" target="_blank" rel="noopener noreferrer" class="social-squircle linkedin" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                            <a href="https://www.facebook.com/share/1Kaox7KtY6/" target="_blank" rel="noopener noreferrer" class="social-squircle facebook" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                            <a href="https://www.instagram.com/muzamil__zaman?igsh=bHBla3kwYmZ4Mmhr" target="_blank" rel="noopener noreferrer" class="social-squircle instagram" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="glass-card contact-form-wrap reveal">
+                        <form id="contact-form" class="contact-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Your Name</label>
+                                    <input type="text" name="name" required placeholder="Enter your name">
+                                </div>
+                                <div class="form-group">
+                                    <label>Phone Number</label>
+                                    <input type="text" name="phone" placeholder="Enter your phone">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input type="email" name="email" required placeholder="Enter your email">
+                                </div>
+                                <div class="form-group">
+                                    <label>Message</label>
+                                    <textarea name="message" rows="3" required placeholder="Tell me about your project..."></textarea>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn-submit">
+                                Send Message <i class="fa-solid fa-paper-plane"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
-    <footer aria-label="Site footer">
+    <footer>
         <div class="container">
-            <p>&copy; 2025 Muzamil Zaman. All rights reserved.</p>
+            <p>&copy; <span id="year">2025</span> Muzamil Zaman. All rights reserved.</p>
         </div>
     </footer>
 
+    <button id="scroll-top" class="scroll-top" aria-label="Scroll to top">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <script src="script.js" defer></script>
 </body>
 
 </html>
