@@ -501,6 +501,33 @@
                 <div class="project-grid">
 
                     <div class="project-card">
+                        <img src="casevision.png"
+                            onerror="this.src='https://placehold.co/600x400/1f2937/9ca3af?text=CaseVision'; this.onerror=null;"
+                            style="object-fit: contain; background: #ffffff;">
+                        <div class="card-content">
+                            <h3>CaseVision — AI Legal Assistant</h3>
+                            <p>
+                                An AI-powered legal research platform built for Pakistani law, my Final Year Project.
+                                It uses OCR (with Urdu support) to digitize case documents and FIRs, integrates
+                                Google Gemini for intelligent legal analysis, and offers a cross-platform mobile
+                                experience backed by a FastAPI service and Firebase.
+                            </p>
+                            <div class="tech-pills">
+                                <span class="tech-pill">Flutter</span>
+                                <span class="tech-pill">FastAPI</span>
+                                <span class="tech-pill">MySQL</span>
+                                <span class="tech-pill">Firebase</span>
+                                <span class="tech-pill">Google Gemini</span>
+                                <span class="tech-pill">OCR</span>
+                            </div>
+                            <div class="card-links">
+                                <a href="https://github.com/muzamilzamann/CaseVision"
+                                    aria-label="CaseVision GitHub repository">GitHub Repo &rarr;</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
                         <img src="pso.jpg"
                             onerror="this.src='https://placehold.co/600x400/1f2937/9ca3af?text=Project+Screenshot'; this.onerror=null;">
                         <div class="card-content">
@@ -546,7 +573,7 @@
                     </div>
 
                     <div class="project-card">
-                        <img src="img1.jpeg"
+                        <img src="AI.ML.jpeg"
                             onerror="this.src='https://placehold.co/600x400/1f2937/9ca3af?text=Calculator+Screenshot'; this.onerror=null;">
                         <div class="card-content">
                             <h3>AI/ML</h3>
@@ -585,119 +612,86 @@
         </section>
 
         <section id="contact" class="section-bg" aria-labelledby="contact-title">
-            <div class="container content-container text-center">
-                <h2 id="contact-title">Contact</h2>
-                <p>
-                    I'm open to internships and project collaborations. For opportunities or questions, feel free to
-                    reach out using the form below.
-                </p>
+            <div class="container">
+                <div class="contact-header text-center">
+                    <span class="section-label">Get In Touch</span>
+                    <h2 id="contact-title">Contact</h2>
+                    <p class="contact-subtitle">
+                        I'm open to internships and project collaborations. For opportunities or questions, feel free
+                        to reach out using the form below.
+                    </p>
+                </div>
 
-                <form id="contact-form" class="contact-form"
-                    onsubmit="event.preventDefault(); alert('Thank you for your message! I will get back to you soon.');">
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label for="name">Name *</label>
-                            <input type="text" id="name" name="name" required placeholder="Your name">
-                        </div>
+                <div class="contact-layout">
+                    <form id="contact-form" class="contact-form"
+                        onsubmit="event.preventDefault(); alert('Thank you for your message! I will get back to you soon.');">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="name">Name *</label>
+                                <input type="text" id="name" name="name" required placeholder="Your name">
+                            </div>
 
-                        <div class="form-group">
-                            <label for="email">Email *</label>
-                            <input type="email" id="email" name="email" required placeholder="your.email@example.com">
-                        </div>
+                            <div class="form-group">
+                                <label for="email">Email *</label>
+                                <input type="email" id="email" name="email" required
+                                    placeholder="your.email@example.com">
+                            </div>
 
-                        <div class="form-group">
-                            <label for="phone">Phone</label>
-                            <input type="tel" id="phone" name="phone" placeholder="Your phone number">
-                        </div>
+                            <div class="form-group full-width">
+                                <label for="subject">Subject</label>
+                                <input type="text" id="subject" name="subject" placeholder="What's this about?">
+                            </div>
 
-                        <div class="form-group">
-                            <label for="age">Age</label>
-                            <input type="number" id="age" name="age" min="16" max="100" placeholder="Your age">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="gender">Gender</label>
-                            <select id="gender" name="gender">
-                                <option value="">Select gender</option>
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
-                                <option value="other">Other</option>
-                                <option value="prefer-not">Prefer not to say</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group hobbies-group">
-                            <label>Hobbies</label>
-                            <div class="checkbox-group">
-                                <label class="checkbox-label">
-                                    <input type="checkbox" name="hobbies" value="reading"> Reading
-                                </label>
-                                <label class="checkbox-label">
-                                    <input type="checkbox" name="hobbies" value="coding"> Coding
-                                </label>
-                                <label class="checkbox-label">
-                                    <input type="checkbox" name="hobbies" value="gaming"> Gaming
-                                </label>
-                                <label class="checkbox-label">
-                                    <input type="checkbox" name="hobbies" value="sports"> Sports
-                                </label>
-                                <label class="checkbox-label">
-                                    <input type="checkbox" name="hobbies" value="music"> Music
-                                </label>
-                                <label class="checkbox-label">
-                                    <input type="checkbox" name="hobbies" value="travel"> Travel
-                                </label>
+                            <div class="form-group full-width">
+                                <label for="message">Message *</label>
+                                <textarea id="message" name="message" rows="5" required
+                                    placeholder="Tell me a bit about your project or opportunity..."></textarea>
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="country">Country</label>
-                            <select id="country" name="country">
-                                <option value="">Select country</option>
-                                <option value="pakistan">Pakistan</option>
-                                <option value="india">India</option>
-                                <option value="usa">United States</option>
-                                <option value="uk">United Kingdom</option>
-                                <option value="canada">Canada</option>
-                                <option value="australia">Australia</option>
-                            </select>
-                        </div>
+                        <button type="submit" class="btn btn-primary submit-btn">Send Message</button>
+                    </form>
 
-                        <div class="form-group">
-                            <label for="city">City</label>
-                            <input type="text" id="city" name="city" placeholder="Your city">
-                        </div>
-
-                        <div class="form-group full-width">
-                            <label for="address">Address</label>
-                            <textarea id="address" name="address" rows="2" placeholder="Your address"></textarea>
-                        </div>
-
-                        <div class="form-group full-width">
-                            <label for="message">Message *</label>
-                            <textarea id="message" name="message" rows="4" required
-                                placeholder="Your message"></textarea>
+                    <div class="contact-info">
+                        <div class="contact-info-card">
+                            <h3>Let's Connect</h3>
+                            <p>
+                                Prefer social media or a direct message? Find me on any of the platforms below —
+                                I try to respond within a day or two.
+                            </p>
+                            <div class="social-links" role="list" aria-label="Social links">
+                                <a href="https://github.com/muzamilzamann" target="_blank" rel="noopener noreferrer"
+                                    aria-label="GitHub profile">
+                                    <svg fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path fill-rule="evenodd"
+                                            d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.009-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.026 2.747-1.026.546 1.379.201 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                </a>
+                                <a href="https://www.linkedin.com/in/muzamil-zaman-53789a285/" target="_blank"
+                                    rel="noopener noreferrer" aria-label="LinkedIn profile">
+                                    <svg fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path
+                                            d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                                    </svg>
+                                </a>
+                                <a href="https://www.instagram.com/muzamil__zaman?igsh=bHBla3kwYmZ4Mmhr"
+                                    target="_blank" rel="noopener noreferrer" aria-label="Instagram profile">
+                                    <svg fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path
+                                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6 6 0 100 12 6 6 0 000-12zm0 9.837a3.837 3.837 0 110-7.674 3.837 3.837 0 010 7.674zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+                                    </svg>
+                                </a>
+                                <a href="https://www.facebook.com/share/1Kaox7KtY6/" target="_blank"
+                                    rel="noopener noreferrer" aria-label="Facebook profile">
+                                    <svg fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path
+                                            d="M22 12.061C22 6.505 17.523 2 12 2S2 6.505 2 12.061c0 5.022 3.657 9.184 8.438 9.939v-7.03H7.898v-2.909h2.54V9.845c0-2.522 1.492-3.915 3.777-3.915 1.094 0 2.238.196 2.238.196v2.476h-1.26c-1.243 0-1.63.775-1.63 1.57v1.889h2.773l-.443 2.909h-2.33V22c4.78-.755 8.437-4.917 8.437-9.939z" />
+                                    </svg>
+                                </a>
+                            </div>
                         </div>
                     </div>
-
-                    <button type="submit" class="btn btn-primary submit-btn">Send Message</button>
-                </form>
-
-                <div class="social-links" role="list" aria-label="Social links">
-                    <a href="https://github.com/" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile">
-                        <svg fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                            <path fill-rule="evenodd"
-                                d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.009-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.026 2.747-1.026.546 1.379.201 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-                                clip-rule="evenodd" />
-                        </svg>
-                    </a>
-                    <a href="https://www.linkedin.com/in/muzamil-zaman-53789a285/" target="_blank"
-                        rel="noopener noreferrer" aria-label="LinkedIn profile">
-                        <svg fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                            <path
-                                d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-                        </svg>
-                    </a>
                 </div>
             </div>
         </section>
