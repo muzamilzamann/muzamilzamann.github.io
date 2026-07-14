@@ -1,6 +1,26 @@
 (function () {
     'use strict';
 
+    // ===== On refresh, always start at the home (top) section =====
+    if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+    }
+
+    var firstLoad = false;
+    try { firstLoad = !sessionStorage.getItem('visited'); } catch (e) {}
+    try { sessionStorage.setItem('visited', '1'); } catch (e) {}
+
+    function startAtHome() {
+        if (location.hash) {
+            try { history.replaceState(null, '', location.pathname + location.search); } catch (e) {}
+        }
+        window.scrollTo(0, 0);
+    }
+    if (!firstLoad) {
+        startAtHome();
+        window.addEventListener('load', startAtHome);
+    }
+
     // ===== Theme toggle with persistence =====
     var stored = null;
     try { stored = localStorage.getItem('theme'); } catch (e) {}

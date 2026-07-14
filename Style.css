@@ -670,6 +670,7 @@ html[data-theme='light'] .project-overlay { background: linear-gradient(to top, 
 .tag-blue { color: #60a5fa; background: rgba(59,130,246,0.1); }
 .tag-rose { color: #fb7185; background: rgba(251,113,133,0.1); }
 .tag-amber { color: #fbbf24; background: rgba(245,158,11,0.1); }
+.tag-emerald { color: #34d399; background: rgba(16,185,129,0.1); }
 .project-info h3 {
     font-family: var(--font-heading);
     font-size: 1.75rem;
